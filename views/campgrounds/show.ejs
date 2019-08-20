@@ -1,0 +1,66 @@
+<%include ../partials/header%>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">YelpCamp</p>
+                <div class="list-group">
+                    <li class="list-group-item active">Info</li>
+                    <li class="list-group-item">Info</li>
+                    <li class="list-group-item">Info</li>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tumbnail">
+                    <img src="<%=campground.image%>" class="img-responsive"></img>
+                    <div class="caption-full">
+                        <h4 class="pull-right">$9.00/night</h4>
+                        <h4>
+                            <%=campground.name%>
+                        </h4>
+                        <p>
+                            <%=campground.description%>
+                        </p>
+                        <p>
+                            Sumited by
+                            <%=campground.author.username%>
+                        </p>
+                        <a href="/campgrounds/<%=campground._id%>/edit" class="btn btn-waring">Edit</a>
+                        <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+                            <button class="btn btn-waring">Remove</button>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div class="well">
+                    <div class="text-right">
+                        <a class="btn btn-success" href="/campgrounds/<%=campground._id%>/comments/new">Comments</a>
+                    </div>
+                    <%campground.comments.forEach(function(comm){%>
+                        <div class="row">
+                            <div class="col-ms-12">
+                                <strong><%=comm.author.username%></strong>
+                                <span class="pull-right">10 days ago</span>
+                                <p>
+                                    <%=comm.text%>
+                                </p>
+                                <a class="btn btn-warning" href="/campgrounds/<%=campground._id%>/comments/<%=comm._id%>/edit">Editx</a>
+                                <form action="/campgrounds/<%=campground._id%>/comments/<%=comm._id%>?_method=DELETE" method="POST">
+                                    <button class="btn btn-waring">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <%})%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+
+
+        <a href="/campgrounds">BACK</a>
+
+
+    </div>
+    <%include ../partials/footer%>
